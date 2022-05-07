@@ -5,13 +5,14 @@
 
 ## Description
 
-Game's purpose and description
+Game's ship 1990
 
 ## User stories MVP
 
 Minimum user stories:
+- User can press the button to start the game.
+- User can move the ship in the Y and X directions whith, when you press Up down left right keys respectively.
 
-- User can ...
 
 ## User stories Backlog
 
