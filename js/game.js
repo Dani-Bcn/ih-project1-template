@@ -1,7 +1,7 @@
 class Game{
   constructor(ctx) {
     this.ctx = ctx;
-    this.nave=new Player(100,100,50,50);
+    this.ship=new Player(100,225,50,50);
   }
   _assignControls() {
     // Controles del teclado
@@ -10,23 +10,23 @@ class Game{
         
           case 'ArrowLeft':
             console.log(event.code);
-           this.nave.moveLeft();
+           this.ship.moveLeft();
           break;
           case 'ArrowRight':
-           this.nave.moveRight();
+           this.ship.moveRight();
           break;
           case 'ArrowUp':
-          this.nave.moveUp();
+          this.ship.moveUp();
           break;
           case 'ArrowDown':
-            this.nave.moveDown();
+            this.ship.moveDown();
           default:       
       } 
     });
   }
 
   _drawPlayer(){
-    this.ctx.fillRect(this.nave.x,this.nave.y,this.nave.width,this.nave.height);    
+    this.ctx.fillRect(this.ship.x,this.ship.y,this.ship.width,this.ship.height);    
   }
 
   _update() {

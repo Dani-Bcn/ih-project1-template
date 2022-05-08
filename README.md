@@ -12,6 +12,7 @@ Game's ship 1990
 Minimum user stories:
 - User can press the button to start the game.
 - User can move the ship in the Y and X directions whith, when you press Up down left right keys respectively.
+- User cannot leave the game area
 
 
 ## User stories Backlog
