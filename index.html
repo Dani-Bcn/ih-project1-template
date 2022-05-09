@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css"/>
-  <title>Ship-star</title>
-</head> 
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
-
-  <div id="start-page">
-    <main>
-      <h1>Title of the game</h1>
-      <p>Instructions / Description</p>
-      <button id="start">START</button>
-    </main>
-  </div>
-
-    <div id="lose-page">
-    <main>
-      <h1>YOU LOSE SUCKER</h1>
-    </main>
-  </div>
-
-  <canvas id="canvas" width="1000" height="500" class="hidden"></canvas>
-  <script src="js/game.js"></script>
-  <script src ="js/player.js"></script>
+    <canvas id="canvas"  class="hidden" width="1300", height="600"> </canvas> 
   
-  <script src="js/scripts.js"></script>
+    <start  id="start" class="show">
+          <h1 class="title">SHIP STARS</h1>
+         <h1 class="press">Press start</h1>        
+        <button id="button">Start</button>         
+    </start>   
 </body>
-</html>
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/player.js"></script>
+<!-- <script src="shoot.js"></script> -->
+<script src="/js/game.js"></script>
+<script src="/js/scripts.js"></script>
+
+</html> 

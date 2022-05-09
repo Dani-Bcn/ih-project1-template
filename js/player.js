@@ -23,7 +23,7 @@ class Player{
     moveDown(){
       
          this.y += this.avancedDown;
-        this.y + this.height >=500 ? this.avancedDown = 0 :this.avancedDown=10;
+        this.y + this.height >=600 ? this.avancedDown = 0 :this.avancedDown=10;
        
     }
 }
