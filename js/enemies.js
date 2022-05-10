@@ -13,7 +13,7 @@ class Enemies{
             if(a > 1400 ){
                 clearInterval(this.intervalSpeed)               
             }
-            this.x -=0.5
+            this.x -=1
             },5000)
     }   
 
