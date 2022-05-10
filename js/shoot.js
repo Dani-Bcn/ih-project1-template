@@ -19,7 +19,7 @@ class Shoot{
     _clearInter(){
         clearInterval(this.intervalShot)
     }
-    shotNow(x){
+    shotNow(x){ 
     this.add=0
          this.intervalShot=setInterval(()=>{
         this.add++

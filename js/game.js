@@ -96,7 +96,7 @@ class Game{
     this._update();    
     this.intervalCreate=setInterval(()=>{
       this._createEnemies()
-    },2000)  
+    },2000)   
   }
 }
  let inc =0

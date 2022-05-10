@@ -7,7 +7,7 @@ class Player{
         this.avancedLeft = 10;
         this.avancedDown =10
     }
-    moveLeft(){     
+    moveLeft(){      
         this.x -= 10;
         this.x <=0 ? this.x = 0 :null;
     }

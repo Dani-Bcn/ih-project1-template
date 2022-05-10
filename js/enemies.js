@@ -6,7 +6,7 @@ class Enemies{
         this.height = height;
         this.intervalSpeed=undefined;        
     }    
-    _speed(){
+    _speed(){ 
         let a =0
         this.intervalSpeed=setInterval(()=>{
             a++           
