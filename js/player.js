@@ -13,14 +13,14 @@ class Player{
     }
     moveRight(){
         this.x += this.avancedLeft;
-         this.x + this.width >=1300 ? this.avancedLeft = 0 :this.avancedLeft=10;
+        this.x + this.width >=1300 ? this.avancedLeft = 0 :this.avancedLeft=10;
     }
     moveUp(){
         this.y -= 10;
         this.y  <=0 ? this.y =0  :null;
     }
     moveDown(){      
-         this.y += this.avancedDown;
+        this.y += this.avancedDown;
         this.y + this.height >=600 ? this.avancedDown = 0 :this.avancedDown=10;       
     }
 }
