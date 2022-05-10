@@ -1,9 +1,9 @@
 class Enemies{
-    constructor(x,y,width,heigth){
-        this.x = Math.floor(Math.random()*(1450 - 1400 + 1) +1400 );
-        this.y = Math.floor(Math.random(0)*550);
+    constructor(x,y,width,height){
+        this.x = Math.floor(Math.random()*(1360 - 1350 + 1) +1350 );
+        this.y = Math.floor(Math.random(0)*470);
         this.width = width;
-        this.heigth = heigth;
+        this.height = height;
         this.intervalSpeed=undefined;        
     }    
     _speed(){
@@ -14,7 +14,6 @@ class Enemies{
                 clearInterval(this.intervalSpeed)               
             }
             this.x -=1
-            },5000)
+            },250)
     }   
-
 }

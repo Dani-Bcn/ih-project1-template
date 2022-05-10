@@ -4,10 +4,9 @@ class Shoot{
         this.y = y;
         this.width = width;
         this.height = height;
-        this.intervalShoot = setInterval;
+        this.intervalShot = setInterval;
         this.add = 0;
-        this.avancedLeft=10git status
-        
+        this.avancedLeft=1      
     }    
       moveLeft(){     
         this.x -= 10;
@@ -17,21 +16,20 @@ class Shoot{
         this.x += this.avancedLeft;
         this.x + this.width >=1300 ? this.avancedLeft = 0 :this.avancedLeft=10;
     }
-
-
-    shootNow(x){
-    this.add=0
-         this.intervalShoot=setInterval(()=>{
-        console.log(x)
-        this.add++
-        if(this.add > 200){
-            clearInterval(this.intervalShoot)
-            this.x=x
-        }            
-            this.x +=10
-        },1)
+    _clearInter(){
+        clearInterval(this.intervalShot)
     }
-
+    shotNow(x){
+    this.add=0
+         this.intervalShot=setInterval(()=>{
+        this.add++
+        this.x +=10
+        if(this.add > 150){
+            this.x=x+10
+            clearInterval(this.intervalShot)            
+        }                       
+        })
+    }
 }
 
 
