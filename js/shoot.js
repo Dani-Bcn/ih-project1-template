@@ -25,7 +25,7 @@ class Shoot{
         this.add++
         this.x +=10
         if(this.add > 150){
-            this.x=x+10
+            this.x=x+40
             clearInterval(this.intervalShot)            
         }                       
         })

@@ -1,35 +1,36 @@
 class Game{
   constructor(ctx) {
     this.ctx = ctx;
-    this.ship = new Player(300,225,50,50);
-    this.shot = new Shoot(320,255,20,20)
+    this.ship = new Player(300,225,160,120);
+    this.shot = new Shoot(325,250,70,50)
     this.enemies = []
     this.intervalDraw = setInterval   
     this.intervalCreate = setInterval
     this.intervalCrash = setInterval
     this.posShipX = 0
-    this.addd=0
-    this.add =0
-    this.count=0
+    this.addd = 0
+    this.add = 0
+    this.countShipsDown = 0 
+    this.shipLife = 5
   }
   _assignControls() {
     // Controles del teclado
     document.addEventListener('keydown', (event) => {
       switch (event.code) {        
-          case 'ArrowLeft':               
+          case 'KeyA':               
             this.ship.moveLeft();
             this.shot.moveLeft();        
           break;
-          case 'ArrowRight':
+          case 'KeyD':
             this.ship.moveRight();
             this.shot.moveRight();
           break;
-          case 'ArrowUp':
+          case 'KeyW':
             this.ship.moveUp();
           break;
-          case 'ArrowDown':
+          case 'KeyS' || 'ArrowDown':
             this.ship.moveDown();
-          break;
+          break;          
           case 'Space':
             this.shot._clearInter()
             this.shot.shotNow(this.posShipX);
@@ -37,51 +38,87 @@ class Game{
       } 
     });
   } 
+  _scores(){
+    const fondo =new Image()
+    fondo.src="../img/cielo.jpg"
+    this.ctx.drawImage(fondo, 0, 0,1600,700);
+    this.ctx.strokeStyle="yellow"
+    this.ctx.font = "20px Courier New";
+    this.ctx.strokeText("Life : " + this.shipLife ,500,50)
+    this.ctx.strokeText(`Destroyed ships : ` +this.countShipsDown ,20, 50);    
+}
   _createEnemies(){    
-    const newEnemies= new Enemies(1400,100,70,70)
+    const newEnemies= new Enemies(1400,100,170,130)
     this.enemies.push(newEnemies)
-    this.enemies.forEach((ele)=>{
-    })
   } 
    _drawShot(x){
-    this.ctx.fillStyle="yellow"
-    this.ctx.fillRect(this.shot.x,this.shot.y=this.ship.y+15,this.shot.width,this.shot.height); 
+    const bullet =new Image()
+     bullet.src="../img/bala.png"
+   
+    this.ctx.drawImage(bullet,this.shot.x,this.shot.y=this.ship.y+30,this.shot.width,this.shot.height); 
   }  
   _drawEnemies(){
     this.enemies.forEach((enenmy)=>{
-      this.ctx.fillStyle="blue"
-    this.ctx.fillRect(enenmy.x,enenmy.y,enenmy.width,enenmy.height)
+     const enemy =new Image()
+     enemy.src="../img/nave3.png"
+    this.ctx.drawImage(enemy,enenmy.x,enenmy.y,enenmy.width,enenmy.height)
   }) 
     }
    _drawPlayer(){     
-    this.ctx.fillStyle="red"    
-    this.ctx.fillRect(this.ship.x,this.ship.y,this.ship.width,this.ship.height);
+     const nave =new Image()
+     nave.src="../img/nave2.png"
+    this.ctx.drawImage(nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
     this.posShipX =this.ship.x   
-  }   
-  _colosions(){
+  }     
+  _colisionsShot(){
      this.enemies.forEach((ene)=>{
          if(this.shot.x >= ene.x 
           && this.shot.x + this.shot.width < ene.x + ene.width &&
-          this.shot.y +20 >= ene.y && this.shot.y -20 + this.shot.height < ene.y + ene.height
+          this.shot.y +10 >= ene.y && this.shot.y -10 + this.shot.height < ene.y + ene.height
           ){            
            let index =this.enemies.indexOf(ene)
             this.enemies.splice(index,1)
-            this.count++ 
+            this.countShipsDown++           
           }
-         }) 
+    }) 
   }
-  _scores(){
-    this.ctx.strokeStyle="red"
-    this.ctx.font = "20px Courier New";
-    this.ctx.strokeText(`Destroyed ships : ` +this.count ,20, 50);
+  _savedEnemies(){
+
+      this.enemies.forEach((ene)=>{
+          console.log(ene.x)
+                if(ene.x < 0  && ene.x >-20){
+                    this.shipLife--
+                    this.shipLife===0?this._gameOver():null
+                    ene.x=-50
+                }
+       
+      })
   }
-  _update() {
+  _colisionsShip(){
+    this.enemies.forEach((ene)=>{
+         if(this.ship.x +this.ship.width -50>= ene.x 
+          && this.ship.x< ene.x + ene.width &&
+          this.ship.y  >= ene.y  - 100 &&  this.ship.y < ene.y +100
+          ){
+            let index =this.enemies.indexOf(ene)
+            this.enemies.splice(index,1)
+            this.countShipsDown++ 
+            this.shipLife=0
+            if(this.shipLife===0){
+              this._gameOver()
+            }
+          }  
+  })
+} 
+  _update() {    
     this.ctx.clearRect(0,0,1400,600);   
+    this._scores() 
     this._drawShot()     
     this._drawPlayer()     
     this._drawEnemies() 
-    this._colosions()   
-    this._scores() 
+    this._colisionsShip()
+    this._colisionsShot()  
+    this._savedEnemies()   
     this.add=0
     this.intervalDraw=setInterval(()=>{
       this.add++     
@@ -98,15 +135,10 @@ class Game{
       this._createEnemies()
     },2000)   
   }
+  _gameOver(){
+    document.querySelector("#canvas").style.display="none"
+    this.ctx.clearRect(0,0,1400,1000)
+    document.querySelector(".show").style.display="grid"
+    location.reload()
+  }    
 }
- let inc =0
- setInterval(()=>{
-     inc++
-    if(inc%2===0){
-        document.querySelector(".press").style.color=" rgb(245, 222, 79,0)" 
-         document.querySelector(".press").style.textShadow="0px 0px,0px black" 
-    }else{
-         document.querySelector(".press").style.color=" rgba(245, 222, 79,1)"
-         document.querySelector(".press").style.textShadow="0px 0px,10px black" 
-    }   
- },700)
