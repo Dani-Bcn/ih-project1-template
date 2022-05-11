@@ -4,7 +4,7 @@ class Enemies{
         this.y = Math.floor(Math.random(0)*470);
         this.width = width;
         this.height = height;
-        this.intervalSpeed=undefined;        
+        this.intervalSpeed=undefined;         
     }    
     _speed(){ 
         let a =0

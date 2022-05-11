@@ -5,7 +5,7 @@ class Player{
         this.width = width;
         this.height = height;    
         this.avancedLeft = 10;
-        this.avancedDown =10
+        this.avancedDown =10 
     }
     moveLeft(){      
         this.x -= 10;

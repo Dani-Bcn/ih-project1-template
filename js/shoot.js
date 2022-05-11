@@ -10,7 +10,7 @@ class Shoot{
     }    
       moveLeft(){     
         this.x -= 10;
-        this.x <=0 ? this.x = 0 :null;
+        this.x <=0 ? this.x = 0 :null; 
     }
     moveRight(){
         this.x += this.avancedLeft;

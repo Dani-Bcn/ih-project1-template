@@ -16,7 +16,7 @@ class Game{
   _assignControls() {
     // Controles del teclado
     document.addEventListener('keydown', (event) => {
-      switch (event.code) {        
+      switch (event.code) {         
           case 'KeyA':               
             this.ship.moveLeft();
             this.shot.moveLeft();        

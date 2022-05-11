@@ -5,7 +5,7 @@ document.querySelector("#button").addEventListener("click", ()=>{
     document.querySelector("#canvas").style.display="grid"
     const game = new Game(ctx)
     game.start()
-})
+}) 
  let inc =0
  setInterval(()=>{
      inc++
