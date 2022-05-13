@@ -2,20 +2,59 @@
 <html lang="en">  
     <head> 
         <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
+       <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
     </head>
     <body>
-        <canvas id="canvas"  class="hidden" width="1300", height="600"> 
-        
-        </canvas> 
-        <start  id="start" class="show">
-            <h1 class="title">STAR SHIP</h1>
-            <h1 class="press">Press start</h1>        
-            <button id="button">Start</button>         
-        </start>       
+        <canvas id="canvas"  class="hidden" width="1350", height="600"> </canvas>               
+         <container class="container">
+                <start  id="start">
+                    <button id="button_start" class="button">Start</button>   
+                    <button id="button_settings" class="button"> Settings</button>
+                    <button id="button_play" class="button">Music</button>                   
+                </start>       
+                <div id="rules">
+                    <h2>Rules</h2>
+                    <br>
+                    <ul>
+                        <li>
+                            <h3>The player wins when his score reaches 100.</h3>
+                        </li>
+                        <li>
+                            <h3>the player loses when his life reaches zero.</h3>
+                        </li>
+                        <li>
+                            <h3>If the player collides with a ship he loses.</h3>
+                        </li>
+                        <li>
+                            <h3>If the enemy ship reaches the other side the player will lose a life.</h3>
+                        </li>
+                        <li>
+                            <h3>If the player takes a heart, a greedy will be added.</h3>
+                        </li>
+                    </ul>
+                </div> 
+         </container>        
+              
+                   
+              
+            
+            
+            
+        <div>
+  	   <div>
+    <audio id="getheart" src="../audio/effect-glup.mp3"  ></audio>                         
+    <audio id="ship_destruct" src="../audio/nave_destructor.mp3"></audio>                
+    <audio id="audiocrash" src="../audio/disparo_nave.mp3"  ></audio>       
+  	<audio id="audio1" class="audio" src="../audio/music1.mp3" preload="auto"></audio>	
+</div>	
+</div>
     </body>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/enemies.js"></script>

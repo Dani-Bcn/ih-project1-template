@@ -20,6 +20,7 @@ class Shoot{
         clearInterval(this.intervalShot)
     }
     shotNow(x){ 
+        document.getElementById("audiocrash").play()  
     this.add=0
          this.intervalShot=setInterval(()=>{
         this.add++
