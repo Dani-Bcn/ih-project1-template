@@ -11,13 +11,18 @@ class Game{
     this.intervalFondo =  undefined
     this.intervalDrawLife = undefined
     this.intervalCreateLife = undefined
+    this.intervalBooms = undefined
     this.posShipX = 0
     this.addd = 0
     this.add = 0
     this.countShipsDown = 0 
-    this.shipLife = 5
-    this.i=0
+    this.shipLife = []
+    this.i = 0
     this.countLife= 0
+    this.heart = [1,2,3,4]
+    this.explo = undefined
+    this.positionEnemiesX = 0
+    this.positionEnemiesY = 0
   }
   _assignControls() {
     // Controles del teclado
@@ -43,8 +48,7 @@ class Game{
           default:       
       } 
     });
-  } 
-  
+  }   
   _createEnemies(){    //Creamos enemigos y los almacenanos en una array
       const newEnemies= new Enemies(1400,100,170,130)
       this.enemies.push(newEnemies)
@@ -65,13 +69,49 @@ class Game{
       bullet.src="../img/bala.png"   
       this.ctx.drawImage(bullet,this.shot.x,this.shot.y=this.ship.y+30,this.shot.width,this.shot.height); 
   }  
-  _drawEnemies(){
-      this.enemies.forEach((enenmy)=>{
-      const enemy =new Image()
-      enemy.src="../img/nave3.png"
-      this.ctx.drawImage(enemy,enenmy.x,enenmy.y,enenmy.width,enenmy.height)
-  }) 
-    }
+    _drawEnemies(){
+        this.enemies.forEach((enenmy)=>{
+        const enemy =new Image()
+        enemy.src="../img/nave3.png"
+        this.ctx.drawImage(enemy,enenmy.x,enenmy.y,enenmy.width,enenmy.height)
+    }) 
+  }  
+  _Booms(){  
+      let c=0
+      this.intervalBooms=setInterval(()=>{
+      if( c <= boomsArray.length){
+        this.explo=boomsArray[c]
+        c++
+      }
+      },50)
+      if(c == boomsArray.length){
+        this.explo=undefined
+        clearInterval(this.intervalBooms)
+        c=0
+      }     
+    }  
+     _colisionsShot(){
+      this.enemies.forEach((ene)=>{
+        if(this.shot.x >= ene.x 
+        && this.shot.x + this.shot.width < ene.x + ene.width 
+        && this.shot.y +10 >= ene.y
+        && this.shot.y -10 + this.shot.height < ene.y + ene.height
+        ){               
+        this.positionEnemiesX = ene.x
+        this.positionEnemiesY = ene.y         
+          this._Booms()      
+          document.getElementById("ship_destruct").play()
+          let index =this.enemies.indexOf(ene)
+          this.enemies.splice(index,1)
+          this.countShipsDown++           
+        }        
+     }) 
+  }
+  _drawBooms(){
+    if(this.explo){
+      this.ctx.drawImage(this.explo,this.positionEnemiesX,this.positionEnemiesY,200,200) 
+    }     
+  }
    _drawPlayer(){     
        const nave =new Image()
        nave.src="../img/nave2.png"
@@ -88,38 +128,30 @@ class Game{
       }     
     },1000)    
       this.ctx.drawImage(fondo,this.i,0,4600,600);
-    //  this. ctx .shadowBlur = "10"
-      
+    //  this. ctx .shadowBlur = "10"      
     //   this.ctx .shadowColor="black"   // Las sombras ralentizan mucho el juego ( buscar solución)
     //  this. ctx .shadowOffsetX = "10";
     //   this.ctx .shadowOffsetX = "10";
-      this.ctx.strokeStyle="yellow"
+      this.ctx.strokeStyle="blue"
       this.ctx.strokeText(`Score : ` +this.countShipsDown ,20, 50);  
-      this.ctx.font = "30px 'Coiny'";
-      this.shipLife<=2?this.ctx.strokeStyle="#ff0000":this.ctx.strokeStyle="yellow"
-      
-      this.ctx.strokeText("Life : " + this.shipLife ,500,50)
-       
-  }    
-  _colisionsShot(){
-      this.enemies.forEach((ene)=>{
-        if(this.shot.x >= ene.x 
-        && this.shot.x + this.shot.width < ene.x + ene.width 
-        && this.shot.y +10 >= ene.y
-        && this.shot.y -10 + this.shot.height < ene.y + ene.height
-        ){       
-          document.getElementById("ship_destruct").play()
-          let index =this.enemies.indexOf(ene)
-          this.enemies.splice(index,1)
-          this.countShipsDown++           
-        }        
-     }) 
-  }
+      this.ctx.font = "30px 'Coiny'";    
+      let b =0
+      const hearts= new Image()
+      hearts.src="../img/life.png"
+      this.heart.forEach(()=>{
+             b+=50
+             this.ctx.drawImage(hearts,400+ b,20,50,25)
+      })      
+      this.shipLife<=2?this.ctx.strokeStyle="#ff0000":this.ctx.strokeStyle="blue"            
+      this.ctx.strokeText("Life : ",300,50)   
+  }     
   _savedEnemies(){ //si el enemigo llega al otro lado de la pantalla al player le resta una vida
-    this.enemies.forEach((ene)=>{   console.log(ene.x)
+    this.enemies.forEach((ene)=>{ 
       if(ene.x < 0  && ene.x >-20){
+        document.getElementById("ship_saved").play()
+        this.heart.pop()
         this.shipLife--
-        this.shipLife===0?this._gameOver():null
+        this.heart.length===0?this._gameOver():null
         ene.x=-50
       }       
     })
@@ -146,7 +178,8 @@ class Game{
       if(lifes.x <= this.ship.x + this.ship.width 
       &&  this.ship.x< lifes.x + lifes.width 
       &&  lifes.y > this.ship.y - 30    
-      &&  lifes.y + lifes.height  < this.ship.y + this.ship.height + 30 ){     
+      &&  lifes.y + lifes.height  < this.ship.y + this.ship.height + 30 ){ 
+        this.heart.unshift(this.hearts)    
         document.getElementById("getheart").play()
         let indexLife = this.life.indexOf(lifes)
         this.life.splice(indexLife,1)
@@ -154,7 +187,7 @@ class Game{
       }    
     })}
   _update() {    // fracción de código que se referesca 60 veces por segundo
-    this.ctx.clearRect(0,0,1400,600);   
+    this.ctx.clearRect(0,0,1400,600);    
     this._scores() 
     this._drawShot()     
     this._drawPlayer()    
@@ -164,6 +197,7 @@ class Game{
     this._colisionsLife()
     this._colisionsShot()  
     this._savedEnemies()   
+     this._drawBooms()
     this.add = 0
     this.intervalDraw=setInterval(()=>{//pintamos los enemigos 
       this.add++     
