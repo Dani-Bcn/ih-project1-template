@@ -16,7 +16,8 @@
                 document.getElementById("audio1").pause()
                 document.getElementById("button_play").innerHTML="Audio on"
             }else{
-                document.getElementById("audio1").play()  
+                
+                 document.getElementById("audio1").play() 
                 document.getElementById("button_play").innerHTML="Audio off"  
             }           
         })
@@ -27,7 +28,35 @@
         document.getElementById("button_settings").addEventListener("mouseout",()=>{
            document.getElementById("rules").style.opacity="0"
          })
+         let musicArray=[]
+         let a=1     
+         const addSongs=()=>{
+            if(document.getElementById("audio"+a)){                  
+                musicArray.push(document.getElementById("audio"+a))
+               a++
+            }       
+         }  
+         setInterval(()=>{
+                addSongs()
+        },)
+        setTimeout(()=>{      
+            musicArray.forEach((song,index)=>{
+            //    console.log(musicArray[0])
+               var song = document.createElement("BUTTON");
+               song.id="song"+ index
+             
+                document.getElementById("songs").appendChild(song);
+               song.innerHTML=musicArray[index].id   
+            }) 
 
-
-        }
-       
+            musicArray.forEach((song,index)=>{
+                document.getElementById("song" + index).addEventListener("click", (event)=>{
+                   console.log(song,index)  
+                   document.getElementById("audio" + index).play()
+            })
+              
+        
+        })
+        },1000)        
+ 
+    }

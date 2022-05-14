@@ -90,13 +90,14 @@ class Game{
       this.ctx.drawImage(fondo,this.i,0,4600,600);
     //  this. ctx .shadowBlur = "10"
       
-    //   this.ctx .shadowColor="black"   // 
+    //   this.ctx .shadowColor="black"   // Las sombras ralentizan mucho el juego ( buscar solución)
     //  this. ctx .shadowOffsetX = "10";
     //   this.ctx .shadowOffsetX = "10";
       this.ctx.strokeStyle="yellow"
       this.ctx.strokeText(`Score : ` +this.countShipsDown ,20, 50);  
       this.ctx.font = "30px 'Coiny'";
-      this.shipLife<=2?this.ctx.strokeStyle="#FFA5A7":this.ctx.strokeStyle="yellow"
+      this.shipLife<=2?this.ctx.strokeStyle="#ff0000":this.ctx.strokeStyle="yellow"
+      
       this.ctx.strokeText("Life : " + this.shipLife ,500,50)
        
   }    
