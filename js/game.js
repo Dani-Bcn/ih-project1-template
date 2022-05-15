@@ -127,13 +127,13 @@ class Game{
         this.i=0        
       }     
     },1000)    
-      this.ctx.drawImage(fondo,this.i,0,4600,600);
+      this.ctx.drawImage(fondo,this.i,-200,4400,1000);
     //  this. ctx .shadowBlur = "10"      
     //   this.ctx .shadowColor="black"   // Las sombras ralentizan mucho el juego ( buscar solución)
     //  this. ctx .shadowOffsetX = "10";
     //   this.ctx .shadowOffsetX = "10";
       this.ctx.strokeStyle="blue"
-      this.ctx.strokeText(`Score : ` +this.countShipsDown ,20, 50);  
+      this.ctx.strokeText(`Score : ` + this.countShipsDown ,20, 50);  
       this.ctx.font = "30px 'Coiny'";    
       let b =0
       const hearts= new Image()
@@ -227,7 +227,7 @@ class Game{
   }
   _gameOver(){
     document.querySelector("#canvas").style.display="none"
-    this.ctx.clearRect(0,0,1400,1000)
+    this.ctx.clearRect(0,0,400,100)
     location.reload()
   }    
 }

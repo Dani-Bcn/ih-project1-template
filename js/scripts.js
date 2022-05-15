@@ -9,15 +9,21 @@
         const game = new Game(ctx)
         game.start()
     }         
-        let bollear=true// Play music / Stop
+        let bollear=false// Play music / Stop
         document.getElementById("button_play").addEventListener("click",()=>{
         bollear=!bollear
             if(bollear){
-                document.getElementById("audio1").pause()
-                document.getElementById("button_play").innerHTML="Audio on" 
-            }else{                
-                 document.getElementById("audio1").play() 
-                 document.getElementById("button_play").innerHTML="Audio off"  
+              document.getElementById("song").style.opacity="1"
+              document.getElementById("main").style.marginTop="-700px"
+              document.getElementById("main").style.opacity="0"
+              document.getElementById("song").style.marginTop="-50px"
+
+            }else{  
+            document.getElementById("main").style.marginTop="300px"
+                document.getElementById("main").style.opacity="1"
+              document.getElementById("song").style.marginTop="-1200px"
+                document.getElementById("song").style.opacity="0"        
+               
             }           
         })
             document.getElementById("button_settings").addEventListener("mouseover",()=>{
@@ -51,5 +57,6 @@
                    document.getElementById("audio" + index).play()
             })        
         })
-        },1000)         
+        },1000)     
+        
     }
