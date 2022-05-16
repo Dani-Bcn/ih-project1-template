@@ -11,24 +11,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
     </head>
-    <body>         
-        <canvas id="canvas"  class="hidden" width="1400", height="800"> </canvas>               
-       
-        <container class="container">         
-                
-                <start  id="start">
-                    <button id="button_start" class="button">Start</button>   
-                    <button id="button_settings" class="button"> Settings</button>
-                    <button id="button_play" class="button">Music</button>                   
-                </start>        
-                     <div id="main"></div>
-                <div id="song">                   
-                      <h1>Chose the song</h1>             
-                </div>                            
+    <body>
+      <div id="black_page"></div>     
+        <div id="ini"></div>
+        <canvas id="canvas"  class="hidden" width="1400", height="800"> </canvas>          
+        <container class="container"> 
+                          
+                <start  id="menu">
+                    <button id="button_start" class="button">Start</button>                    
+                    <button id="button_play" class="button">Settings</button>
+                                       
+                </start>   
+                   <div id="song">                   
+                      <h1>Choose the song</h1>    
+                      <button class="button_songs"></button>  
+                       <h1>Audio on / off</h1>     
+                      <button id="button_soundOn"></button>   
+                          
+                </div>                    
+                <div id="main"></div>
+                    
+                <div id="settings">                   
+                      <h1>Choose the ship</h1>    
+                      <button class="button_songs"></button>      
+                                          
+                </div>        
+                <div>
+                    
+                </div>    
                 <div id="rules">                       
-                    <h2>Rules</h2>
+               
                     <br> 
-                    <ul>
+                    <ul>     <h2>Rules</h2>
                         <li>
                             <h3>The player wins when his score reaches 100.</h3>
                         </li>
@@ -46,22 +60,18 @@
                         </li>
                     </ul>
                 </div>                 
-         </container>                   
-        <div>
-        <div>
+         </container>            
                 <audio id="getheart" src="../audio/effect-glup.mp3"></audio>      
                 <audio id="ship_saved" src="../audio/ship_salved.wav"></audio>                         
                 <audio id="ship_destruct" src="../audio/nave_destructor.wav"></audio>                
-                <audio id="audiocrash" src="../audio/disparo_nave.mp3"  ></audio>       
+                <audio id="audiocrash" src="../audio/disparo_nave.mp3"  ></audio>  
                 <audio id="audio1" class="audio" src="../audio/music1.mp3" preload="auto"></audio>	
                 <audio id="audio2" class="audio" src="../audio/music2.mp3" preload="auto"></audio>	
                 <audio id="audio3" class="audio" src="../audio/music3.mp3" preload="auto"></audio>	
                 <audio id="audio4" class="audio" src="../audio/music4.mp3" preload="auto"></audio>	
                 <audio id="audio5" class="audio" src="../audio/music5.mp3" preload="auto"></audio>	
-                <audio id="audio6" class="audio"   media.muted = true src="../audio/music6.mp3" preload="auto"></audio>	
-                <audio id="audio7" class="audio"   media.muted = true src="../audio/music6.mp3" preload="auto"></audio>	   
-            </div>	
-        </div>
+                <audio id="audio6" class="audio" src="../audio/music6.mp3" preload="auto"></audio>
+                <audio id="sound_gameOver" class="audio" src="../audio/sound_gameOver.wav" preload="auto"></audio>	   	          
     </body>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/booms.js"></script>

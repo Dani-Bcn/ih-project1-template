@@ -23,6 +23,8 @@ class Game{
     this.explo = undefined
     this.positionEnemiesX = 0
     this.positionEnemiesY = 0
+    this.nave =new Image()
+    this.bullet =new Image()
   }
   _assignControls() {
     // Controles del teclado
@@ -65,9 +67,13 @@ class Game{
     })
   } 
    _drawShot(x){ //pintamos las balas
-      const bullet =new Image()
-      bullet.src="../img/bala.png"   
-      this.ctx.drawImage(bullet,this.shot.x,this.shot.y=this.ship.y+30,this.shot.width,this.shot.height); 
+        if(this.heart.length < 1 ){
+         this.bullet.src="../img/transparencia.png" 
+        }else{
+           this.bullet.src="../img/bala.png"   
+      this.ctx.drawImage(this.bullet,this.shot.x,this.shot.y=this.ship.y+30,this.shot.width,this.shot.height); 
+        }
+     
   }  
     _drawEnemies(){
         this.enemies.forEach((enenmy)=>{
@@ -109,19 +115,32 @@ class Game{
   }
   _drawBooms(){
     if(this.explo){
+      if(this.heart.length < 1 ){
+
+         this.ctx.drawImage(this.explo,this.positionShipX,this.positionShipY,200,200)
+
+      }
       this.ctx.drawImage(this.explo,this.positionEnemiesX,this.positionEnemiesY,200,200) 
     }     
   }
-   _drawPlayer(){     
-       const nave =new Image()
-       nave.src="../img/nave2.png"
-       this.ctx.drawImage(nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
+   _drawPlayer(){  
+       if(this.heart.length < 1 ){
+         this.bullet.src="../img/transparencia.png" 
+          this.nave.src="../img//transparencia.png"
+          this.ctx.drawImage(this.nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
+       this.posShipX =this.ship.x 
+       }else{
+            this.nave.src="../img/nave2.png" 
+          this.ctx.drawImage(this.nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
        this.posShipX =this.ship.x   
+       }
+     
+      
   } 
   _scores(){   // pintamos dentro del canvas
     const fondo =new Image()
-    fondo.src="../img/cielo.png"  
-    this.intervalFondo=setInterval(()=>{
+      fondo.src="../img/cielo.png"  
+      this.intervalFondo=setInterval(()=>{
       this.i-=0.1    
       if(this.i <= -3000){       
         this.i=0        
@@ -150,25 +169,38 @@ class Game{
       if(ene.x < 0  && ene.x >-20){
         document.getElementById("ship_saved").play()
         this.heart.pop()
-        this.shipLife--
-        this.heart.length===0?this._gameOver():null
+        this.heart.length===0?
+       setTimeout(()=>{
+         this._gameOver()
+       },500):null
+          
         ene.x=-50
       }       
     })
   }
   _colisionsShip(){ // Si el enemigo choca con nosotros resta todas la vida y finaliza en juego
     this.enemies.forEach((ene)=>{
-      if(this.ship.x +this.ship.width -50>= ene.x 
-      && this.ship.x< ene.x + ene.width 
-      && this.ship.y  >= ene.y  - 100 
-      && this.ship.y < ene.y +100
+        if(this.ship.x +this.ship.width -50>= ene.x 
+        && this.ship.x< ene.x + ene.width 
+        && this.ship.y  >= ene.y  - 100 
+        && this.ship.y < ene.y +100
       ){
+        document.getElementById("ship_destruct").play()
+         this.positionShipX = this.ship.x
+        this.positionShipY = this.ship.y - 10// + 10 para que la nave explte en el lugar exacto donde se encuentra
+        
+        this.positionEnemiesX = ene.x
+        this.positionEnemiesY = ene.y 
+
+        this._Booms() 
         let index =this.enemies.indexOf(ene)
         this.enemies.splice(index,1)
-        this.countShipsDown++ 
-        this.shipLife=0
-        if(this.shipLife===0){
-          this._gameOver()
+        this.heart=[]
+        if(this.heart.length===0){
+          setTimeout(()=>{
+           this._gameOver() 
+          },500)
+          
         }
       }  
     })
@@ -183,7 +215,6 @@ class Game{
         document.getElementById("getheart").play()
         let indexLife = this.life.indexOf(lifes)
         this.life.splice(indexLife,1)
-        this.shipLife++
       }    
     })}
   _update() {    // fracción de código que se referesca 60 veces por segundo
@@ -197,13 +228,13 @@ class Game{
     this._colisionsLife()
     this._colisionsShot()  
     this._savedEnemies()   
-     this._drawBooms()
+    this._drawBooms()
     this.add = 0
     this.intervalDraw=setInterval(()=>{//pintamos los enemigos 
-      this.add++     
-      if(this.add < this.enemies.length){
+    this.add++     
+    if(this.add < this.enemies.length){
          this.enemies[this.add]._speed()          
-      }
+    }
     },1000)   
     this.countLife = 0  
     this.intervalDrawLife=setInterval(()=>{//pintamos los corazones
@@ -214,7 +245,12 @@ class Game{
     },2000)     
     window.requestAnimationFrame(() => this._update());  
   }    
-  start() {   
+  start() {  
+      document.getElementById("black_page").style.display="grid"
+      document.getElementById("black_page").style.opacity="1"
+      setTimeout(()=>{
+        document.getElementById("black_page").style.opacity="0"
+      },600)
     this._assignControls();
     this._update();    
     this.intervalCreate=setInterval(()=>{
@@ -225,9 +261,20 @@ class Game{
       console.log(this.life)
     },10000) 
   }
-  _gameOver(){
-    document.querySelector("#canvas").style.display="none"
-    this.ctx.clearRect(0,0,400,100)
-    location.reload()
-  }    
+  _gameOver(){     
+     const [...musicArray]=document.getElementsByClassName("audio")
+    
+     musicArray.forEach((song)=>{
+        console.log(song)
+        song.pause()
+     })
+    document.getElementById("sound_gameOver").play()     
+    document.querySelector("body").style.backgroundImage="url('../img/page_gameOver.png')"
+    document.querySelector("body").style.backgroundColor="black"  
+    document.querySelector("#canvas").style.opacity="0"
+    this.ctx.clearRect(0,0,400,100)        
+    setTimeout(()=>{    
+      location.reload()   
+    } ,3500   )
+  }
 }
