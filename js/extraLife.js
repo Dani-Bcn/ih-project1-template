@@ -1,6 +1,6 @@
 class ExtraLife{
     constructor(x, y, width, height){
-        this.x = Math.floor(Math.random()*(1360 - 1400 + 1) +1400 );
+        this.x = Math.floor(Math.random()*(1460 - 1550 + 1) +1550 );
         this.y = Math.floor(Math.random(0)*470);
         this.width = width;
         this.height = height;

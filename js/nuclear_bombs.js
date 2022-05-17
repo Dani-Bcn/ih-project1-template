@@ -1,6 +1,6 @@
 class Nuclear{
     constructor(x,y,widht,height){
-        this.x = Math.floor(Math.random()*(1360 - 1400 + 1) +1400 );
+        this.x = Math.floor(Math.random()*(1360 - 1500 + 1) +1500 );
         this.y = Math.floor(Math.random(0)*470);
         this.width = widht
         this.height = height
