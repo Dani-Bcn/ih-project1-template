@@ -12,7 +12,7 @@ body{
     background-size:100% ;
     background-repeat: no-repeat; 
     opacity: 1; 
-    transition: 1s;
+    transition: 1s; 
 }
 .hidden{
     display: none; 

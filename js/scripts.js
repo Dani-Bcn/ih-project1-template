@@ -1,5 +1,4 @@
-  window.onload = function () { 
-        
+  window.onload = function () {         
       setTimeout(()=>{
           document.getElementById("black_page").style.display="none"
       },1000)
@@ -9,8 +8,7 @@
         start()
     })          
     const start =() =>{ 
-        document.querySelector("body").style.backdropFilter= "blur(0px)"
-       
+        document.querySelector("body").style.backdropFilter= "blur(0px)"       
         setTimeout(()=>{
            document.querySelector("#canvas").style.display="grid"  
            document.querySelector(".container").style.display="none"  
@@ -23,7 +21,7 @@
     }         
     // show page settings
     let bollear=false
-    document.getElementById("button_play").addEventListener("click",()=>{
+    document.getElementById("button_play").addEventListener("click",()=>{ 
         bollear=!bollear
         document.querySelector("body").style.backdropFilter= "blur(2px)"        
         const elementSettings= document.getElementById("settings")
@@ -77,23 +75,20 @@
            //quitar  / poner sonido
         let state=false
          document.getElementById("button_soundOn").addEventListener("click",(()=>{ 
-             state=!state
-         if(state){
-                musicArray.forEach((song)=>{
-                console.log(song)
-                song.volume=0   
-                })                
-                  document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_on.png')"
-         }else{
-                musicArray.forEach((song)=>{
-                console.log(song)
-                song.volume=1  
-                })  
-                 document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_off.png')"
-         }
-         
-                
-           
+            state=!state
+            if(state){
+                    musicArray.forEach((song)=>{
+                    console.log(song)
+                    song.volume=0   
+                    })                
+                    document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_on.png')"
+            }else{
+                    musicArray.forEach((song)=>{
+                    console.log(song)
+                    song.volume=1  
+                    })  
+                    document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_off.png')"
+            }     
         }))
     }
         

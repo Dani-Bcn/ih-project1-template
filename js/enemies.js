@@ -11,7 +11,7 @@ class Enemies{
         this.intervalSpeed=setInterval(()=>{
             a++           
             if(a > 1400 ){
-                clearInterval(this.intervalSpeed)               
+                clearInterval(this.intervalSpeed)                
             }
             this.x -=1
             },250)

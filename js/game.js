@@ -3,9 +3,14 @@ class Game{
     this.ctx = ctx;
     this.ship = new Player(300,225,160,120);
     this.shot = new Shoot(325,250,70,50)
+    this.nave =new Image()
+    this.bullet =new Image()
+    this.nuclearScore =new Image()
     this.enemies = []
     this.life = []
     this.nuclear = []
+    this.shipLife = []
+    this.heart = [1,2,3,4]
     this.intervalDrawEnemies = undefined   
     this.intervalCreatenemies = undefined
     this.intervalCrash = undefined
@@ -18,21 +23,16 @@ class Game{
     this.addd = 0
     this.countEnemies = 0
     this.countNuclear = 0
-    this.countShipsDown = 0 
-    this.shipLife = []
+    this.countShipsDown = 0     
     this.i = 0
-    this.countLife= 0
-    this.heart = [1,2,3,4]
+    this.countLife= 0    
     this.explo = undefined
     this.positionEnemiesX = 0
-    this.positionEnemiesY = 0
-    this.nave =new Image()
-    this.bullet =new Image()
-    this.nuclearScore =new Image()
+    this.positionEnemiesY = 0   
   }
   _assignControls() {
     // Controles del teclado
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', (event) => { 
       switch (event.code) {         
           case 'KeyA':               
             this.ship.moveLeft();
@@ -255,7 +255,6 @@ class Game{
     this._colisionsNuclear() 
     this._savedEnemies()   
     this._drawBooms()
-
     //creamos las nucleares
     this.countNuclear = 0
     this.intervalCreatenuclear=setInterval(()=>{
@@ -282,6 +281,7 @@ class Game{
     },2000)     
     window.requestAnimationFrame(() => this._update());  
   }    
+  //empieza el juego
   start() {  
       document.getElementById("black_page").style.display="grid"
       document.getElementById("black_page").style.opacity="1"
