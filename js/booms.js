@@ -8,4 +8,4 @@ const boom4= new Image()
 boom4.src=("../img/boom4.png")
 const boom5= new Image()
 boom5.src=("../img/boom5.png")
-const boomsArray=[boom1,boom2,boom3,boom4,boom5] 
+const boomsArray=[boom1,boom2,boom3,boom4,boom5]  

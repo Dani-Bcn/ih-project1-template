@@ -15,7 +15,7 @@ Minimum user stories:
 - User cannot leave the game area
 
 
-## User stories Backlog 
+## User stories Backlog  
 
 - User can ...
 

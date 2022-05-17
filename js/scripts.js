@@ -38,7 +38,7 @@
             document.getElementById("rules").style.opacity="1" 
              document.getElementById("rules").style.marginLeft="0px" 
         }else{  
-            document.querySelector("body").style.backdropFilter= "blur(0px)"
+            document.querySelector("body").style.backdropFilter= "blur(0px)" 
             elementSettings.style.opacity = "0"
             elementSettings.style.marginTop = "-1100px"
             elementMain.style.marginTop="-1800px"

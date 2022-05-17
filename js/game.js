@@ -17,7 +17,7 @@ class Game{
     this.intervalFondo =  undefined
     this.intervalDrawLife = undefined
     this.intervalCreateLife = undefined
-    this.intervalCreatenuclear = undefined
+    this.intervalCreatenuclear = undefined 
     this.intervalBooms = undefined
     this.posShipX = 0
     this.addd = 0
