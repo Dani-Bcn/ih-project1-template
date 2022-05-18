@@ -1,9 +1,10 @@
 class Game{
-  constructor(ctx) {
+  constructor(ctx,selectship) {
+    console.log(selectship)
     this.ctx = ctx;
     this.ship = new Player(300,225,160,120);
     this.shot = new Shoot(325,250,70,50)
-    this.nave =new Image()
+    this.nave = new Image()
     this.bullet =new Image()
     this.nuclearScore =new Image()
     this.enemies = []
@@ -26,7 +27,8 @@ class Game{
     this.countLife= 0    
     this.explo = undefined
     this.positionEnemiesX = 0
-    this.positionEnemiesY = 0   
+    this.positionEnemiesY = 0 
+    this.selectship = selectship
   }
   _assignControls() {
     // Controles del teclado
@@ -34,7 +36,8 @@ class Game{
       switch (event.code) {         
           case 'KeyA':               
             this.ship.moveLeft();
-            this.shot.moveLeft();        
+            this.shot.moveLeft();  
+            console.log(this.selectship)      
           break;
           case 'KeyD':
             this.ship.moveRight();
@@ -79,7 +82,7 @@ class Game{
     _drawEnemies(){
         this.enemies.forEach((enenmy)=>{
         const enemy =new Image()
-        enemy.src="../img/nave3.png"
+        enemy.src="../img/enemy.png"
         this.ctx.drawImage(enemy,enenmy.x,enenmy.y,enenmy.width,enenmy.height)
     }) 
   }  
@@ -131,7 +134,8 @@ class Game{
           this.ctx.drawImage(this.nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
           this.posShipX =this.ship.x 
        }else{
-          this.nave.src="../img/nave7.png" 
+       
+          this.nave.src=this.selectship
           this.ctx.drawImage(this.nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
           this.posShipX =this.ship.x   
        }      
@@ -230,7 +234,7 @@ class Game{
     if(this.countEnemies < this.enemies.length){
          this.enemies[this.countEnemies]._speed()          
     }
-    },1000) 
+    },1500) 
     //creamos los corazones
     this.countLife = 0  
     this.intervalDrawLife=setInterval(()=>{
@@ -238,7 +242,7 @@ class Game{
     if(this.countLife < this.life.length){
         this.life[this.countLife]._speedLife()          
     }
-    },2000)     
+    },3000)     
     window.requestAnimationFrame(() => this._update());  
   }    
   //empieza el juego

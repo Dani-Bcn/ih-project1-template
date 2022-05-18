@@ -1,4 +1,5 @@
-  window.onload = function () {         
+  window.onload = function () { 
+     
       setTimeout(()=>{
           document.getElementById("black_page").style.display="none"
       },1000)
@@ -16,7 +17,7 @@
         setTimeout(()=>{
              document.querySelector("#canvas").style.opacity="1"           
         },500)            
-        const game = new Game(ctx)
+        const game = new Game(ctx,selectShipArray)
         game.start()
     }         
     // show page settings
@@ -40,7 +41,7 @@
         }else{  
             document.querySelector("body").style.backdropFilter= "blur(0px)" 
             elementSettings.style.opacity = "0"
-            elementSettings.style.marginTop = "-1100px"
+            elementSettings.style.marginTop = "100px"
             elementMain.style.marginTop="-1650px"
             elementMain.style.opacity="1"
             elementSound.style.marginTop="1000px"
@@ -86,22 +87,33 @@
                 })  
                 document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_off.png')"            }     
         }))
-        const imgArray=[]
-        const selectShipArray =[]
-        for(i = 1;i< 7;i++){
+        //Selección de nave
+         const imgArray=[]
+        const selectShipArray =["../img/nave2.png"]  
+          for(i = 1;i< 7;i++){
            const eleImg = document.getElementById("img" + i)
         imgArray.push(eleImg)
         console.log(imgArray)
-        }
-        
-       imgArray.forEach((ele)=>{
+        }        
+       imgArray.forEach((ele, index)=>{
           ele.addEventListener("click", (()=>{
-
-              selectShipArray.unshift(ele)
+              selectShipArray.unshift(ele.attributes.src.nodeValue)
                console.log(selectShipArray)
               selectShipArray.splice(1,1)
                 console.log(selectShipArray)
            }))
-       })
+           //cambiar imagen con mouse over
+
+            // ele.addEventListener("mouseover",()=>{
+            //     console.log(ele.attributes.src.nodeValue)
+            //     ele.attributes.src.nodeValue=`../img/nave${index+1}_invert.png`
+            // })
+            
+        })   
+        document.querySelector("li").addEventListener(("click",()=>{
+            document.querySelector("li").style.boxShadow="10px 20px 30px black";
+        }))
+        
+      
       
     }

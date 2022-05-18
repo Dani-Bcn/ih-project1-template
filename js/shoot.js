@@ -6,7 +6,7 @@ class Shoot{
         this.height = height;
         this.intervalShot = setInterval;
         this.add = 0;
-        this.avancedLeft=1      
+        this.avancedLeft=50   
     }    
       moveLeft(){     
         this.x -= 20;
@@ -14,7 +14,7 @@ class Shoot{
     }
     moveRight(){
         this.x += this.avancedLeft;
-        this.x + this.width >=1300 ? this.avancedLeft = 0 :this.avancedLeft=20;
+        this.x + this.width >=1300 ? this.avancedLeft = 0 :this.avancedLeft=50;
     }
     _clearInter(){
         clearInterval(this.intervalShot)
@@ -26,7 +26,7 @@ class Shoot{
             this.add++
             this.x +=10
             if(this.add > 150){
-                this.x=x+40
+                this.x=x+80
                 clearInterval(this.intervalShot)            
             }                       
         })

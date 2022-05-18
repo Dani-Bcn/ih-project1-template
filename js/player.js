@@ -4,8 +4,8 @@ class Player{
         this.y = y;
         this.width = width;
         this.height = height;    
-        this.avancedLeft = 20;
-        this.avancedDown = 20 
+        this.avancedLeft = 50;
+        this.avancedDown = 30 
     }
     moveLeft(){      
         this.x -= 20;
@@ -13,7 +13,7 @@ class Player{
     }
     moveRight(){
         this.x += this.avancedLeft;
-        this.x + this.width >=1800 ? this.avancedLeft = 0 :this.avancedLeft=20; 
+        this.x + this.width >=1800 ? this.avancedLeft = 0 :this.avancedLeft=50; 
     }
     moveUp(){
         this.y -= 20;
@@ -21,6 +21,6 @@ class Player{
     }
     moveDown(){      
         this.y += this.avancedDown;
-        this.y + this.height >=730 ? this.avancedDown = 0 :this.avancedDown=20;       
+        this.y + this.height >=730 ? this.avancedDown = 0 :this.avancedDown=30;       
     } 
 }
