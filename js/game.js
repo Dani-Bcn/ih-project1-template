@@ -8,7 +8,6 @@ class Game{
     this.nuclearScore =new Image()
     this.enemies = []
     this.life = []
-    this.nuclear = []
     this.shipLife = []
     this.heart = [1,2,3,4]
     this.intervalDrawEnemies = undefined   
@@ -22,7 +21,6 @@ class Game{
     this.posShipX = 0
     this.addd = 0
     this.countEnemies = 0
-    this.countNuclear = 0
     this.countShipsDown = 0     
     this.i = 0
     this.countLife= 0    
@@ -51,9 +49,6 @@ class Game{
           case 'Space':
             this.shot._clearInter()
             this.shot.shotNow(this.posShipX);
-          break;          
-          case 'Enter':
-           this._drawBoomsAll()
           default:       
       } 
     });
@@ -66,17 +61,6 @@ class Game{
       const newLife =new ExtraLife(1400,100,80,50)
       this.life.push(newLife)
   }
-  _createNuclear(){     //Creamos las bombas nucleares y las almacenamos en una array
-      const newNuclear =new Nuclear(1400,100,150,150)
-      this.nuclear.push(newNuclear)
-  }
-  _drawNuclear(){  //pintamos las bombas nucleares
-       this.nuclear.forEach((nuclear)=>{
-       const imageNuclear =new Image()
-       imageNuclear.src="../img/nuclear.png"   
-       this.ctx.drawImage(imageNuclear,nuclear.x,nuclear.y,nuclear.width,nuclear.height); 
-    })
-  } 
     _drawLife(){  //pintamos los corazones 
        this.life.forEach((lifes)=>{
        const heart =new Image()
@@ -122,7 +106,7 @@ class Game{
       //pinta la explosion en la posicion de los enemigos
       this.ctx.drawImage(this.explo,this.positionEnemiesX,this.positionEnemiesY,200,200) 
     }     
-  }
+  }    
      _colisionsShot(){
       this.enemies.forEach((ene)=>{
           if(this.shot.x >= ene.x 
@@ -147,7 +131,7 @@ class Game{
           this.ctx.drawImage(this.nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
           this.posShipX =this.ship.x 
        }else{
-          this.nave.src="../img/nave2.png" 
+          this.nave.src="../img/nave7.png" 
           this.ctx.drawImage(this.nave, this.ship.x, this.ship.y,this.ship.width,this.ship.height);    
           this.posShipX =this.ship.x   
        }      
@@ -162,15 +146,12 @@ class Game{
     }     
     },1000)    
       this.ctx.drawImage(fondo,this.i,-200,4400,1000)
-       //barra nuclear     
-      this.ctx.strokeText("Nuclear : ",1000,75,)  
-      this.ctx.drawImage(this.nuclearScore,1200,0,100,100) 
       //barra puntos
       this.ctx.strokeStyle="blue"
       this.ctx.strokeText(`Score : ` + this.countShipsDown , 50, 75);  
       this.ctx.font = "30px 'Coiny'";    
       //barra de vida
-      let b =0
+      let b = 0
       const hearts= new Image()
       hearts.src="../img/life.png"
       this.heart.forEach(()=>{
@@ -188,7 +169,9 @@ class Game{
         this.heart.length===0?
         setTimeout(()=>{
           this._gameOver()
-        },500):null          
+        },500)
+        :
+        null          
         ene.x=-50
       }       
     })
@@ -198,22 +181,21 @@ class Game{
         if(this.ship.x +this.ship.width -50>= ene.x 
         && this.ship.x< ene.x + ene.width 
         && this.ship.y  >= ene.y  - 100 
-        && this.ship.y < ene.y +100
-      ){
-        document.getElementById("ship_destruct").play()
-        this.positionShipX = this.ship.x
-        this.positionShipY = this.ship.y - 10// - 10 para que la nave explote en el lugar exacto donde se encuentra        
-        this.positionEnemiesX = ene.x
-        this.positionEnemiesY = ene.y 
-        this._Booms() 
-        let index =this.enemies.indexOf(ene)
-        this.enemies.splice(index,1)
-        this.heart=[]
-        if(this.heart.length===0){
-          setTimeout(()=>{
-           this._gameOver() 
-        },500)          
-        }
+        && this.ship.y < ene.y +100){      
+          document.getElementById("ship_destruct").play()
+          this.positionShipX = this.ship.x
+          this.positionShipY = this.ship.y - 10// - 10 para que la nave explote en el lugar exacto donde se encuentra        
+          this.positionEnemiesX = ene.x
+          this.positionEnemiesY = ene.y 
+          this._Booms() 
+          let index =this.enemies.indexOf(ene)
+          this.enemies.splice(index,1)
+          this.heart=[]
+          if(this.heart.length===0){
+            setTimeout(()=>{
+            this._gameOver() 
+          },500)          
+          }
       }  
     })
   } 
@@ -229,22 +211,9 @@ class Game{
         this.life.splice(indexLife,1)
       }    
     })}
-     _colisionsNuclear(){// 
-    this.nuclear.forEach((nuc)=>{
-      if(nuc.x <= this.ship.x + this.ship.width /1.5
-        &&  this.ship.x< nuc.x 
-        &&  nuc.y > this.ship.y - 120    
-        &&  nuc.y + nuc.height  < this.ship.y + this.ship.height + 100 ){ 
-        document.getElementById("getheart").play()
-        let indexNuc = this.nuclear.indexOf(nuc)
-        this.nuclear.splice(indexNuc,1)
-        this.nuclearScore.src="../img/nuclear.png"        
-      }     
-    })}
   _update() {    // fracción de código que se referesca 60 veces por segundo
-    this.ctx.clearRect(0,0,1400,600);    
+    this.ctx.clearRect(0,0,1400,600); 
     this._scores() 
-    this._drawNuclear()
     this._drawShot()     
     this._drawPlayer()    
     this._drawLife() 
@@ -252,17 +221,8 @@ class Game{
     this._colisionsShip()
     this._colisionsLife()
     this._colisionsShot() 
-    this._colisionsNuclear() 
-    this._savedEnemies()   
-    this._drawBooms()
-    //creamos las nucleares
-    this.countNuclear = 0
-    this.intervalCreatenuclear=setInterval(()=>{
-    this.countNuclear++     
-    if(this.countNuclear < this.nuclear.length){
-         this.nuclear[this.countNuclear]._speedNuclear()          
-    }
-    },1000) 
+    this._savedEnemies() 
+    this._drawBooms() 
     //creamos los enemigos 
     this.countEnemies = 0
     this.intervalDrawEnemies=setInterval(()=>{
@@ -271,7 +231,7 @@ class Game{
          this.enemies[this.countEnemies]._speed()          
     }
     },1000) 
-    //ceramos los corazones
+    //creamos los corazones
     this.countLife = 0  
     this.intervalDrawLife=setInterval(()=>{
     this.countLife++     
@@ -296,14 +256,10 @@ class Game{
       this.intervalCreateLife=setInterval(()=>{
         this._createLife()
       },9000) 
-      this.intervalCreatenuclear=setInterval(()=>{
-        this._createNuclear()
-      },10000)
   }
   _gameOver(){     
-     const [...musicArray]=document.getElementsByClassName("audio")    
+      const [...musicArray]=document.getElementsByClassName("audio")    
       musicArray.forEach((song)=>{
-        console.log(song)
         song.pause()
      })
     document.getElementById("sound_gameOver").play()     
@@ -315,4 +271,6 @@ class Game{
       location.reload()   
     } ,3500   )
   }
+   
+
 }

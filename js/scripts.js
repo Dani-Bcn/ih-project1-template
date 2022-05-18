@@ -30,9 +30,9 @@
         if(bollear){
             document.querySelector("body").style.backdropFilter= "blur(10px)"
             elementSettings.style.opacity = "1"
-            elementSettings.style.marginTop = "400px"
+            elementSettings.style.marginTop = "500px"
             elementSound.style.opacity = "1"
-            elementSound.style.marginTop = "600px"
+            elementSound.style.marginTop = "800px"
             elementMain.style.marginTop = "0px"
             elementMain.style.opacity = "-800px" 
             document.getElementById("rules").style.opacity="1" 
@@ -41,7 +41,7 @@
             document.querySelector("body").style.backdropFilter= "blur(0px)" 
             elementSettings.style.opacity = "0"
             elementSettings.style.marginTop = "-1100px"
-            elementMain.style.marginTop="-1800px"
+            elementMain.style.marginTop="-1650px"
             elementMain.style.opacity="1"
             elementSound.style.marginTop="1000px"
             elementSound.style.opacity="0"  
@@ -61,10 +61,9 @@
             addSongs()
         },)
         //canviar de canción
-        let countSong=-1
-   
+        let countSong=-1   
         document.querySelector(".button_songs").addEventListener("click",(()=>{  
-                      musicArray[5].pause()
+            musicArray[5].pause()
             countSong++
             musicArray[countSong].play()
             musicArray[countSong-1].load()
@@ -74,21 +73,35 @@
         }))
            //quitar  / poner sonido
         let state=false
-         document.getElementById("button_soundOn").addEventListener("click",(()=>{ 
+        document.getElementById("button_soundOn").addEventListener("click",(()=>{ 
             state=!state
             if(state){
-                    musicArray.forEach((song)=>{
-                    console.log(song)
+                musicArray.forEach((song)=>{
                     song.volume=0   
-                    })                
-                    document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_on.png')"
+                })                
+                document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_on.png')"
             }else{
-                    musicArray.forEach((song)=>{
-                    console.log(song)
+                musicArray.forEach((song)=>{
                     song.volume=1  
-                    })  
-                    document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_off.png')"
-            }     
+                })  
+                document.getElementById("button_soundOn").style.backgroundImage="url('../img/music_off.png')"            }     
         }))
-    }
+        const imgArray=[]
+        const selectShipArray =[]
+        for(i = 1;i< 7;i++){
+           const eleImg = document.getElementById("img" + i)
+        imgArray.push(eleImg)
+        console.log(imgArray)
+        }
         
+       imgArray.forEach((ele)=>{
+          ele.addEventListener("click", (()=>{
+
+              selectShipArray.unshift(ele)
+               console.log(selectShipArray)
+              selectShipArray.splice(1,1)
+                console.log(selectShipArray)
+           }))
+       })
+      
+    }
