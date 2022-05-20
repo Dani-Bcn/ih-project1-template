@@ -74,7 +74,7 @@
         }))
            //quitar  / poner sonido
         let state=false
-        document.getElementById("button_soundOn").addEventListener("click",(()=>{ 
+        document.getElementById("button_soundOn").addEventListener("click",(_=>{ 
             state=!state
             if(state){
                 musicArray.forEach((song)=>{

@@ -3,7 +3,7 @@ class Game{
     console.log(selectship)
     this.ctx = ctx;
     this.ship = new Player(300,225,160,120);
-    this.shot = new Shoot(325,250,70,50)
+    this.shot = new Bullet(325,250,70,50)
     this.nave = new Image()
     this.bullet =new Image()
     this.nuclearScore =new Image()
