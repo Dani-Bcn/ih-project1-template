@@ -11,8 +11,11 @@ Game's ship 1990
 
 Minimum user stories:
 - User can press the button to start the game.
-- User can move the ship in the Y and X directions whith, when you press Up down left right keys respectively.
+- User can move the ship in all directions
 - User cannot leave the game area
+- User can recover life
+- User can game over
+
 
 
 ## User stories Backlog  
@@ -23,6 +26,7 @@ Minimum user stories:
 
 - <code>game.js</code>: contains all the elements for the game to work. Methods: start(), \_update()
 - <code>scripts.js</code>: contains all the DOM manipulation code to start the game
+- <code>player</code>: contains the elements to create and move the player
 
 ## Useful links
 
