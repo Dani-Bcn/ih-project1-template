@@ -5,6 +5,7 @@ Title: Ships clouds
 [<img src="./img/main_page.png">]
 
 ## Description
+It's a dynamic game in which you can shoot and dodge the enemies, you can also get hearts to keep playing, be careful not to collide with enemy ships !!!!
 
 
 
