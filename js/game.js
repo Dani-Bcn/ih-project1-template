@@ -32,21 +32,23 @@ class Game{
   }
   _assignControls() {
     // Controles del teclado
+
+    
     document.addEventListener('keydown', (event) => { 
       switch (event.code) {         
-          case 'KeyA':               
+          case 'ArrowLeft':               
             this.ship.moveLeft();
             this.shot.moveLeft();  
             console.log(this.selectship)      
           break;
-          case 'KeyD':
+          case 'ArrowRight':
             this.ship.moveRight();
             this.shot.moveRight();
           break;
-          case 'KeyW':
+          case 'ArrowUp':
             this.ship.moveUp();
           break;
-          case 'KeyS' || 'ArrowDown':
+          case 'ArrowDown' || 'ArrowDown':
             this.ship.moveDown();
           break;          
           case 'Space':
